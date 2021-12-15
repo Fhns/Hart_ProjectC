@@ -180,10 +180,12 @@ void handleInterrupt21(int ax, char* bx, int cx, int dx)
 void readFile(char* buffer, char* filename, int* sectorsRead)
 {
 	char dir[512];
-	readSector(dir, 2);
 	int fileentry;
 	int letter;
 	int fileExists;
+    int sector_number;
+	int sector;
+    readSector(dir, 2);
 	for (fileentry = 0; fileentry < 512; fileentry += 32)
 	{
 		for (letter = 0; letter < 6; letter += 1)
@@ -205,11 +207,9 @@ void readFile(char* buffer, char* filename, int* sectorsRead)
 		*sectorsRead = 0;
 		return;
 	}
-	int sector_number;
-	int sector;
 	for (sector_number = 6; sector_number < 26; sector_number += 1)
 	{
-		sector = dir[entry+sector_number];
+		sector = dir[fileentry+sector_number];
 		if (sector = 0)
 		{
 			break;
@@ -241,8 +241,8 @@ void terminate()
 {
 	//while(1);
     // Step 4 - The Shell - making your own user program
-    interrupt(0x21, 6, "shell", 0, 0);
     char shellname[6];
+    interrupt(0x21, 6, "shell", 0, 0);
     shellname[0] = 's';
     shellname[1] = 'h';
     shellname[2] = 'e';

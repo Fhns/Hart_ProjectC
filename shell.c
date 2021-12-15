@@ -4,14 +4,18 @@
 void main() {
 
 	// ProjectC
-	// Step 4 - The Shell - making your own user program
-	syscall(0, "SHELL>", 0, 0);
-	syscall(5, 0, 0, 0);
-	// Step 5 - Shell Command "type"
+    // Step 5 - Shell Command "type"
 	char type[5];
 	char buffer[13312];
 	int typeI;
 	int i;
+    // Step 6 - Shell Command "exec"
+	char exec[5];
+	char* chars;
+	int execI;
+	// Step 4 - The Shell - making your own user program
+	syscall(0, "SHELL>", 0, 0);
+	syscall(5, 0, 0, 0);
 	type[0] = 't';
 	type[1] = 'y';
 	type[2] = 'p';
@@ -33,14 +37,11 @@ void main() {
 	}
 	if (typeI == 0)
 	{
-		printString("file not found");
-		break;
+// Commented out for easy compiling
+//		printString("file not found");
+//		break;
 	}
 	buffer[0] = '\0';
-	// Step 6 - Shell Command "exec"
-	char exec[5]
-	char* chars;
-	int execI;
 	exec[0] = 'e';
 	exec[1] = 'x';
 	exec[2] = 'e';
@@ -62,8 +63,9 @@ void main() {
 	}
 	if (execI == 0)
 	{
-		printString("file not found");
-		break;
+// Commented out for easy compiling
+//		printString("file not found");
+//		break;
 	}
 	chars[0] = '\0';
 }
